@@ -1,0 +1,58 @@
+---
+title: "R Notebook Wrangle"
+output: html_notebook
+---
+
+## Data Cleaning with R
+
+The process of identifying, correcting, or removing inaccurate raw data for downstream purposes. Or, more colloquially, an unglamorous yet wholely necessary first step towards an analysis-ready.
+
+### Check List
+
+-   [ ]  Familiarize yourself with the data set
+
+-   [ ] Check for structural errors
+
+-   [ ] Check for data irregularities
+
+-   [ ] Decide how to deal with missing values
+
+-   [ ] Document data versions and changes made
+
+### Step 1: Familiarize yourself with the data set
+
+An important "pre-data cleaning" Step is **Domain Knowledge**.
+
+> Be sure to read up or ask an expert **before** diving into data cleaning if your variables don't make sense to you at first.sure to read up or ask an expert **before** diving into data cleaning if your variables don't make sense to you at first.
+
+```{r}
+file.info("./mental-heath-in-tech-2016_20161114.csv/mental-heath-in-tech-2016_20161114.csv")$size
+```
+
+The data file we're utilizing is 1104203 bytes or 1.01MB.
+
+```{r}
+df = read.csv("./mental-heath-in-tech-2016_20161114.csv/mental-heath-in-tech-2016_20161114.csv")
+
+```
+
+```{r}
+head(df)
+```
+
+```{r}
+str(df) # Show structure of data frame
+```
+
+#### Simple Fast Exploratory Data Analysis in R with DataExplorer Package
+
+```{r}
+#Install if the package doesn't exist 
+update.packages()
+
+```
+
+```{r}
+install.packages('DataExplorer')
+library(DataExplorer)
+```

@@ -47,7 +47,7 @@ Al usar R tenemos tres formas de crear fechas-tiempo
 
 El estandar que usa R para crear fechas es `yyyy-mm-dd`
 
-### **Converting from strings** 
+### **Converting from strings**
 
 ```{r}
 ymd("2021-01-20")
@@ -82,10 +82,9 @@ as_date(now()) #to convert a date-time to a date
 
 # Data structures
 
-### **Data frames**
+### **Data frames** {#data-frames}
 
-Data frames are the most common way of storing and analyzing data in R,
-so it's important to understand what they are and how to create them.
+Data frames are the most common way of storing and analyzing data in R, so it's important to understand what they are and how to create them.
 
 There are a few key things to keep in mind when you are working with data frames: 
 
@@ -103,9 +102,7 @@ data.frame(x = c(1,2,3), y = c(1.5, 5.5, 7.5))
 
 ## Files
 
-Use the **dir.create** function to create a new folder, or
-directory, to hold your files. Place the name of the folder in the
-parentheses of the function.
+Use the **dir.create** function to create a new folder, or directory, to hold your files. Place the name of the folder in the parentheses of the function.
 
 ```{r}
 file.create ("new_text_file.txt")
@@ -123,11 +120,7 @@ unlink ("new_text_file.txt")
 
 ### Matrices (optional)
 
-A **matrix** is a two-dimensional collection of data
-elements. This means it has both rows and columns. By contrast, a vector
-is a one-dimensional sequence of data elements. But like vectors,
-matrices can only contain a single data type. For example, you can't
-have both logicals and numerics in a matrix. 
+A **matrix** is a two-dimensional collection of data elements. This means it has both rows and columns. By contrast, a vector is a one-dimensional sequence of data elements. But like vectors, matrices can only contain a single data type. For example, you can't have both logicals and numerics in a matrix. 
 
 ```{r}
 
@@ -137,4 +130,10 @@ matrix(c(3:8), nrow = 2)
 ```{r}
 matrix(c(3:8), ncol = 2)
 
+```
+
+### Instalar paquete para Estilos
+
+```{r}
+install.packages("styler")
 ```
