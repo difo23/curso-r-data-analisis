@@ -9,7 +9,7 @@ The process of identifying, correcting, or removing inaccurate raw data for down
 
 ### Check List
 
--   [ ]  Familiarize yourself with the data set
+-   [ ] Familiarize yourself with the data set
 
 -   [ ] Check for structural errors
 
@@ -54,5 +54,180 @@ update.packages()
 
 ```{r}
 install.packages('DataExplorer')
-library(DataExplorer)
+
 ```
+
+```{r}
+if (!require(devtools)) install.packages("devtools")
+```
+
+```{r}
+library(devtools)
+```
+
+```{r}
+library("DataExplorer")
+```
+
+# Why Do we need clean data?
+
+-   [ ] Access Data
+-   [ ] Explore and Process Data
+-   [ ] Extract Insights
+-   [ ] Report Insights
+
+## Data type constraints
+
+-   Text or in R is character
+-   Integer - integer - numeric
+-   Binary - logical
+-   Category - factor
+-   Date - date
+
+```{r}
+edidiv <- read.csv("./CC-RBasics/edidiv.csv")
+head(edidiv)
+```
+
+### Glimpsin at data tupes
+
+```{r}
+library(dplyr)
+glimpse(edidiv)
+```
+
+**Note** : This help you to see the data type in the data set.
+
+### Checking data types
+
+-   `is.character()`
+-   `is.numeric()`
+-   `is.logical`
+-   for all `data types`
+
+```{r}
+is.numeric(edidiv$year)
+```
+
+```{r}
+install.packages("assertive")
+```
+
+```{r}
+
+library(assertive)
+assert_is_factor(edidiv$taxonName)
+```
+
+```{r}
+class(edidiv$organisationName)
+```
+
+```{r}
+mean(edidiv$taxonName)
+```
+
+### Comma problems
+
+```{r}
+library("tidyverse")
+```
+
+```{r}
+comma_problems <- c("5,454", "5,456", "3,456", "6,789")
+
+```
+
+```{r}
+library(stringr)
+```
+
+```{r}
+revenue_trimed = str_remove(comma_problems, ",")
+revenue_trimed
+```
+
+### Character to Numeric
+
+```{r}
+as.numeric(revenue_trimed)
+```
+
+### Putting it together
+
+```{r}
+edidiv %>% 
+  mutate( 
+    grid_mod = as.numeric(
+      str_remove(gridReference, "NT")
+    )
+  ) 
+```
+
+# Google class - data cleaning
+
+The next packages are important for data cleaning process in R:
+
+```{r}
+install.packages("here")
+```
+
+```{r}
+library('here')
+```
+
+The goal of the here package is to enable easy file referencing in project-oriented workflows.\
+In contrast to using setwd(), which is fragile and dependent on the way you organize your files,\
+here uses the top-level directory of a project to easily build paths to files.
+
+```{r}
+install.packages("skimr")
+```
+
+```{r}
+library("skimr")
+```
+
+skimr is designed to provide summary statistics about variables in data frames, tibbles, data tables and vectors. It is opinionated in its defaults, but easy to modify.
+
+In base R, the most similar functions are summary() for vectors and data frames and fivenum() for numeric vectors:
+
+```{r}
+install.packages("janitor")
+```
+
+```{r}
+library("janitor")
+```
+
+The janitor package is a R package that has simple functions for examining and cleaning dirty data. It was built with beginning and intermediate R users in mind and is optimised for user-friendliness
+
+```{r}
+install.packages("dplyr")
+```
+
+```{r}
+library("dplyr")
+```
+
+**dplyr** is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
+
+-   mutate() adds new variables that are functions of existing variables
+-   select() picks variables based on their names.
+-   filter() picks cases based on their values.
+-   summarise() reduces multiple values down to a single summary.
+-   arrange() changes the ordering of the rows.
+
+```{r}
+install.packages("palmerpenguins")
+```
+
+```{r}
+install.packages("remotes")
+```
+
+```{r}
+library("remotes")
+```
+
+\`
