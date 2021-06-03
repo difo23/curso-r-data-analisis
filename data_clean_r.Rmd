@@ -5,7 +5,9 @@ output: html_notebook
 
 ## Data Cleaning with R
 
-The process of identifying, correcting, or removing inaccurate raw data for downstream purposes. Or, more colloquially, an unglamorous yet wholely necessary first step towards an analysis-ready.
+The process of identifying, correcting, or removing inaccurate raw data
+for downstream purposes. Or, more colloquially, an unglamorous yet
+wholely necessary first step towards an analysis-ready.
 
 ### Check List
 
@@ -23,7 +25,10 @@ The process of identifying, correcting, or removing inaccurate raw data for down
 
 An important "pre-data cleaning" Step is **Domain Knowledge**.
 
-> Be sure to read up or ask an expert **before** diving into data cleaning if your variables don't make sense to you at first.sure to read up or ask an expert **before** diving into data cleaning if your variables don't make sense to you at first.
+> Be sure to read up or ask an expert **before** diving into data
+> cleaning if your variables don't make sense to you at first.sure to
+> read up or ask an expert **before** diving into data cleaning if your
+> variables don't make sense to you at first.
 
 ```{r}
 file.info("./mental-heath-in-tech-2016_20161114.csv/mental-heath-in-tech-2016_20161114.csv")$size
@@ -44,29 +49,10 @@ head(df)
 str(df) # Show structure of data frame
 ```
 
-#### Simple Fast Exploratory Data Analysis in R with DataExplorer Package
-
 ```{r}
 #Install if the package doesn't exist 
 update.packages()
 
-```
-
-```{r}
-install.packages('DataExplorer')
-
-```
-
-```{r}
-if (!require(devtools)) install.packages("devtools")
-```
-
-```{r}
-library(devtools)
-```
-
-```{r}
-library("DataExplorer")
 ```
 
 # Why Do we need clean data?
@@ -176,9 +162,12 @@ install.packages("here")
 library('here')
 ```
 
-The goal of the here package is to enable easy file referencing in project-oriented workflows.\
-In contrast to using setwd(), which is fragile and dependent on the way you organize your files,\
-here uses the top-level directory of a project to easily build paths to files.
+The goal of the here package is to enable easy file referencing in
+project-oriented workflows.\
+In contrast to using setwd(), which is fragile and dependent on the way
+you organize your files,\
+here uses the top-level directory of a project to easily build paths to
+files.
 
 ```{r}
 install.packages("skimr")
@@ -188,9 +177,12 @@ install.packages("skimr")
 library("skimr")
 ```
 
-skimr is designed to provide summary statistics about variables in data frames, tibbles, data tables and vectors. It is opinionated in its defaults, but easy to modify.
+skimr is designed to provide summary statistics about variables in data
+frames, tibbles, data tables and vectors. It is opinionated in its
+defaults, but easy to modify.
 
-In base R, the most similar functions are summary() for vectors and data frames and fivenum() for numeric vectors:
+In base R, the most similar functions are summary() for vectors and data
+frames and fivenum() for numeric vectors:
 
 ```{r}
 install.packages("janitor")
@@ -200,7 +192,9 @@ install.packages("janitor")
 library("janitor")
 ```
 
-The janitor package is a R package that has simple functions for examining and cleaning dirty data. It was built with beginning and intermediate R users in mind and is optimised for user-friendliness
+The janitor package is a R package that has simple functions for
+examining and cleaning dirty data. It was built with beginning and
+intermediate R users in mind and is optimised for user-friendliness
 
 ```{r}
 install.packages("dplyr")
@@ -210,7 +204,9 @@ install.packages("dplyr")
 library("dplyr")
 ```
 
-**dplyr** is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
+**dplyr** is a grammar of data manipulation, providing a consistent set
+of verbs that help you solve the most common data manipulation
+challenges:
 
 -   mutate() adds new variables that are functions of existing variables
 -   select() picks variables based on their names.
@@ -230,4 +226,405 @@ install.packages("remotes")
 library("remotes")
 ```
 
-\`
+```{r}
+library("palmerpenguins")
+```
+
+### Data explored
+
+```{r}
+skim_without_charts(penguins)
+```
+
+```{r}
+glimpse(penguins)
+```
+
+```{r}
+head(penguins)
+```
+
+```{r}
+penguins %>%
+  select(species)
+```
+
+```{r}
+penguins %>% 
+  select(-species) # Excluded species from penguins dataset
+
+```
+
+### Transform
+
+```{r}
+penguins_fail <- rename( penguins, isl = island) # Rename columns
+```
+
+```{r}
+rename_with(penguins, toupper) # Change toupper and tolower
+```
+
+## File Convention
+
+#### **Do**
+
+-   Keep your filenames to a reasonable length
+
+-   Use underscores and hyphens for readability
+
+-   Start or end your filename with a letter or number
+
+-   Use a standard date format when applicable; example: YYYY-MM-DD
+
+-   Use filenames for related files that work well with default
+    ordering; example: in chronological order, or logical order using
+    numbers first
+
+| E​xamples of good filenames     |
+|---------------------------------|
+| 2020-04-10_march-attendance.R   |
+| 2021_03_20_new_customer_ids.csv |
+| 01_data-sales.html              |
+| 02_data-sales.html              |
+
+### **Arithmetic operators**
+
+| Operator | Description                                                 | Example Code | Result/ Output |
+|----------|-------------------------------------------------------------|--------------|----------------|
+| \+       | Addition                                                    | x + y        | [1] 7          |
+| \-       | Subtraction                                                 | x - y        | [1] -3         |
+| \*       | Multiplication                                              | x \* y       | [1] 10         |
+| /        | Division                                                    | x / y        | [1] 0.4        |
+| %%       | Modulus (returns the remainder after division)              | y %% x       | [1] 1          |
+| %/%      | Integer division (returns an integer value after division)  | y%/% x       | [1] 2          |
+| \^       | Exponent                                                    | y \^ x       | [1]25          |
+
+### **Relational operators**
+
+| **Operator** | **Description**          | Example Code | Result/Output |
+|--------------|--------------------------|--------------|---------------|
+| \<           | Less than                | x \< y       | [1] TRUE      |
+| \>           | Greater than             | x \> y       | [1] FALSE     |
+| \<=          | Less than or equal to    | x \< = 2     | [1] TRUE      |
+| \>=          | Greater than or equal to | y \>= 10     | [1] FALSE     |
+| ==           | Equal to                 | y == 5       | [1] TRUE      |
+| !=           | Not equal to             | x != 2       | [1] FALSE     |
+
+### **Logical operators**
+
+| **Operator** | **Description**          |
+|--------------|--------------------------|
+| &            | Element-wise logical AND |
+| &&           | Logical AND              |
+| \|           | Element-wise logical OR  |
+| \|\|         | Logical OR               |
+| !            | Logical NOT              |
+
+```{r}
+x <- c(3, 5, 7)
+
+y <- c(2, 4, 6)
+
+
+```
+
+```{r}
+x < 5 & y < 5 # all elements tested
+```
+
+```{r}
+x < 5 && y < 5 # first element tested
+```
+
+## Organize your data
+
+```{r}
+penguins %>%
+  arrange(-bill_length_mm)
+```
+
+#### Arrange
+
+```{r}
+penguins_2 <- penguins %>%
+  arrange(-bill_length_mm) # Organized desc - form penguins
+
+penguins_2 # bill is pico in spanish
+```
+
+```{r}
+library(tidyverse)
+```
+
+#### Group By
+
+```{r}
+
+# Careful with drop_na
+penguins %>% 
+  group_by(island) %>%
+  drop_na() %>% # eleminated na values in the data set
+  summarize(mean_bill_length_mm = mean(bill_length_mm))
+
+```
+
+```{r}
+penguins %>% 
+  group_by(island) %>%
+  drop_na() %>% # eleminated na values in the data set
+  summarize(max_bill_length_mm = max(bill_length_mm))
+```
+
+```{r}
+penguins %>% 
+  drop_na() %>%
+  summarize(min(bill_length_mm))
+```
+
+```{r}
+penguins %>% 
+  group_by(island) %>%
+  drop_na() %>% # eleminated na values in the data set
+  summarize(min_bill_length_mm = min(bill_length_mm))
+```
+
+```{r}
+penguins %>% 
+  group_by(species, island) %>%
+  drop_na() %>% # eleminated na values in the data set
+  summarize(max_bl = max(bill_length_mm), mean_bl = mean(bill_length_mm))
+```
+
+#### Filters
+
+```{r}
+penguins %>% 
+  filter(species == 'Adelie') 
+
+```
+
+## Transforming data
+
+```{r}
+id <- c(1:10)
+
+name <- c("John Mendes", "Rob Stewart", "Rachel Abrahamson", "Christy Hickman", "Johnson Harper", "Candace Miller", "Carlson Landy", "Pansy Jordan", "Darius Berry", "Claudia Garcia")
+
+job_title <- c("Professional", "Programmer", "Management", "Clerical", "Developer", "Programmer", "Management", "Clerical", "Developer", "Programmer")
+
+employee <- data.frame(id, name, job_title)
+```
+
+```{r}
+print(employee)
+```
+
+#### Separate
+
+```{r}
+employee_name <- separate(employee, name, into=c("first_name", "last_name"), sep= ' ')
+```
+
+```{r}
+print(employee_name)
+```
+
+#### Unite
+
+```{r}
+unite(employee_name, 'name', first_name, last_name) # By default separeted with _ 
+```
+
+```{r}
+unite(employee_name, 'name', first_name, last_name, sep = ' ') # You can indicated
+```
+
+#### Mutate
+
+```{r}
+penguins_edit <- penguins %>% 
+  mutate(body_mass_kg = body_mass_g/1000, flipper_length_m = flipper_length_mm/1000)
+```
+
+```{r}
+View(penguins_edit)
+```
+
+## Wide to long with tidyr
+
+**Wide data** has observations across several columns. Each column
+contains data from a different condition of the variable. In this
+example, different years. 
+
+![screenshot of a spreadsheet in wide format. there are 7 rows shown and
+8
+columns](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/m9JdRN6aTQCSXUTemq0AVA_4909c4cc120d496c99895460c2ca27f4_Screenshot-2021-01-27-at-2.26.11-PM.png?expiry=1622764800000&hmac=g8HJZjnA-1dNtSKEIQkM5MvDcO45Q4TUiMjuShbLolY)
+
+And, to review what you already learned about the difference, **long
+data** has all the observations in a single column, and variables in
+separate columns. 
+
+![screenshot of spreadsheet in long format. there are 12 rows shown and
+3
+columns](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/AKr0lJTgSaCq9JSU4CmgtA_7608bba87aa04ab4b1695c3b3a22325a_Screenshot-2021-01-27-at-2.29.39-PM.png?expiry=1622764800000&hmac=B0jaSu6NdRwHqvOChnN6P6b3-W_-2jQfBqDIP3c06D0)
+
+### The pivot_longer and pivot_wider functions
+
+[`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html)
+can work with multiple value variables that may have different types,
+inspired by the enhanced `melt()` and `dcast()` functions provided by
+the [data.table](https://github.com/Rdatatable/data.table/wiki) package
+by Matt Dowle and Arun Srinivasan.
+
+[`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html)
+and
+[`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html)
+can take a data frame that specifies precisely how metadata stored in
+column names becomes data variables (and vice versa), inspired by the
+[cdata](https://winvector.github.io/cdata/) package by John Mount and
+Nina Zumel.
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(readr)
+```
+
+```{r}
+relig_income
+```
+
+This dataset contains three variables:
+
+-   `religion`, stored in the rows,
+
+-   `income` spread across the column names, and
+
+-   `count` stored in the cell values.
+
+    ```{r}
+    relig_income %>% 
+      pivot_longer(!religion, names_to = "income", values_to = "count")
+    ```
+
+```{r}
+billboard
+
+```
+
+```{r}
+billboard %>% 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+```
+
+```{r}
+billboard %>% 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    names_prefix = "wk",
+    names_transform = list(week = as.integer),
+    values_to = "rank",
+    values_drop_na = TRUE,
+  )
+```
+
+```{r}
+billboard %>% 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    names_transform = list(week = readr::parse_number),
+    values_to = "rank",
+    values_drop_na = TRUE,
+  )
+
+```
+
+### Many variables in column names
+
+-   The `new_`/`new` prefix indicates these are counts of new cases.
+    This dataset only contains new cases, so we'll ignore it here
+    because it's constant.
+
+-   `sp`/`rel`/`ep` describe how the case was diagnosed.
+
+-   `m`/`f` gives the gender.
+
+-   `014`/`1524`/`2535`/`3544`/`4554`/`65` supplies the age range.
+
+```{r}
+who
+```
+
+```{r}
+who %>% pivot_longer(
+  cols = new_sp_m014:newrel_f65,
+  names_to = c("diagnosis", "gender", "age"), 
+  names_pattern = "new_?(.*)_(.)(.*)",
+  values_to = "count"
+)
+```
+
+```{r}
+who %>% pivot_longer(
+  cols = new_sp_m014:newrel_f65,
+  names_to = c("diagnosis", "gender", "age"), 
+  names_pattern = "new_?(.*)_(.)(.*)",
+  names_transform = list(
+    gender = ~ readr::parse_factor(.x, levels = c("f", "m")),
+    age = ~ readr::parse_factor(
+      .x,
+      levels = c("014", "1524", "2534", "3544", "4554", "5564", "65"), 
+      ordered = TRUE
+    )
+  ),
+  values_to = "count",
+)
+```
+
+## Wider
+
+```{r}
+fish_encounters
+```
+
+```{r}
+fish_encounters %>% pivot_wider(names_from = station, values_from = seen)
+```
+
+```{r}
+fish_encounters %>% pivot_wider(
+  names_from = station, 
+  values_from = seen,
+  values_fill = 0
+)
+```
+
+```{r}
+warpbreaks <- warpbreaks %>% as_tibble() %>% select(wool, tension, breaks)
+warpbreaks
+```
+
+```{r}
+warpbreaks %>% count(wool, tension)
+```
+
+```{r}
+warpbreaks %>% pivot_wider(names_from = wool, values_from = breaks)
+```
+
+```{r}
+warpbreaks %>% 
+  pivot_wider(
+    names_from = wool, 
+    values_from = breaks,
+    values_fn = list(breaks = mean)
+  )
+```

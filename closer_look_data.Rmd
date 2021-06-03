@@ -1,0 +1,86 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Same data, different outcome
+
+Ancombe's quartet: Four dataset that hace nearly identical summary statisty.
+
+```{r}
+install.packages("Tmisc")
+```
+
+```{r}
+library(Tmisc)
+```
+
+```{r}
+data("quartet")
+```
+
+```{r}
+print(quartet)
+```
+
+```{r}
+quartet %>%
+  group_by(set) %>%
+  summarize(mean(x), sd(x), mean(y), sd(y), cor(x, y) )
+```
+
+```{r}
+quartet
+```
+
+```{r}
+install.packages("mgcv")
+```
+
+```{r}
+library("mgcv")
+```
+
+```{r}
+ggplot(quartet, aes(x,y)) + geom_point() + geom_smooth(method = lm, se= FALSE) + facet_wrap(quartet$set)
+```
+
+```{r}
+install.packages('datasauRus')
+```
+
+```{r}
+library('datasauRus')
+```
+
+```{r}
+datasaurus_dozen
+```
+
+```{r}
+ggplot(datasaurus_dozen, aes(x=x, y=y, colour=dataset))+geom_point()+theme_void()+theme(legend.position = "none") + facet_wrap(~dataset, )
+```
+
+### Note: When you have this problem lgfortran
+
+`/usr/bin/ld: cannot find -lgfortran`
+
+You need to use the same version of gcc and gfortran, review this.
+
+## The bias function
+
+```{r}
+install.packages('SimDesign')
+library('SimDesign')
+```
+
+```{r}
+actual_temp <- c(68.3, 70, 72.4, 71, 67, 70)
+predict_temp <- c(67.9, 69, 71.5, 70, 67, 69)
+```
+
+```{r}
+bias(actual_temp, predict_temp)
+```
+
+## Addressing biased data with R
