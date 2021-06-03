@@ -4,3 +4,569 @@ output: html_notebook
 ---
 
 # Visualizations in R
+
+### Popular graph packages:
+
+-   ggplot2
+
+-   Plotly
+
+-   Lattice
+
+-   RGL
+
+-   Dygraphs
+
+-   Leaflet
+
+-   Highcharter
+
+-   Patchwork
+
+-   gganimate
+
+-   ggridges
+
+### Benefits of ggplot2:
+
+-   Create different types of plots
+
+-   Customize the look and feel of plots
+
+-   Create high quality visuals
+
+-   Combine data manipulation and visualization
+
+### Concepts in ggplot2:
+
+-   **Aesthetics** --\> A visual property of an object in your plot
+    (shape, color)
+
+-   **Geoms** ---\> The geometric object used to represent your data
+    (lines, bars)
+
+-   **Facets** ---\> Let you display smaller groups, or subsets, of your
+    data
+
+-   **Labels and annotation**s ---\> Let you Customize your plot
+
+## Create graph basic
+
+```{r}
+install.packages("ggplot2")
+
+install.packages("palmerpenguins")
+```
+
+```{r}
+library(ggplot2)
+library(palmerpenguins)
+```
+
+```{r}
+data(penguins)
+```
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g))
+```
+
+-   geom_point() --\> Scatterplots graph
+
+-   geom_bar() --\> Bars graph
+
+Each geom function in ggplot2 takes a **mapping argument**. This defines
+how variables in your dataset are mapped to visual properties. The
+mapping argument is always paired with the **aes() function**.
+
+# Getting started with ggplot()
+
+```{r}
+library("palmerpenguins")
+library("ggplot2")
+```
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g))
+```
+
+```{r}
+body <- na.omit(penguins$body_mass_g)
+flipper <- na.omit(penguins$flipper_length_mm)
+
+cor(flipper, body)
+```
+
+( + ) is used for add layer in the graph.
+
+1.  Start with the ggplot function and choose a dataset to work with
+2.  Add a geom_function to display your data
+3.  Map the variables you want to plot in the arguments of the aes()
+    function
+
+```{r}
+# Help is very useful 
+?geom_bar
+```
+
+```{r}
+# geom_bar is designed to make it easy to create bar charts that show
+# counts (or sums of weights)
+g <- ggplot(mpg, aes(class))
+# Number of cars in each class:
+g + geom_bar()
+# Total engine displacement of each class
+g + geom_bar(aes(weight = displ))
+# Map class to y instead to flip the orientation
+ggplot(mpg) + geom_bar(aes(y = class))
+```
+
+# Enhancing visualizations in R
+
+#### Colors
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, color = species))
+```
+
+#### Shape
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, color= species, 
+                         shape = species))
+```
+
+#### Size
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, color= species, 
+                         shape = species, size = species))
+```
+
+```{r}
+
+```
+
+#### Alpha
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, shape = species, 
+                         alpha = species))
+```
+
+#### Colors all points
+
+```{r}
+# Note color is out aes function
+ggplot(data = penguins) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, 
+                         shape = species, size = species), color = "blue")
+```
+
+**Ggplot2** is an R package that allows you to create different types of
+data visualizations right in your R workspace. In ggplot2, an
+**aesthetic** is defined as a visual property of an object in your
+plot. 
+
+There are three aesthetic attributes in ggplot2:
+
+-   **Color**: this allows you to change the color of all of the points
+    on your plot, or the color of each data group
+
+-   **Size**: this allows you to change the size of the points on your
+    plot by data group
+
+-   **Shape**: this allows you to change the shape of the points on your
+    plot by data group
+
+# Doing more with ggplot
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g))
+```
+
+```{r}
+ggplot(data = penguins) +
+  geom_smooth(mapping=aes(x=flipper_length_mm, y=body_mass_g)) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g))
+```
+
+```{r}
+ggplot(data = penguins) +
+  geom_smooth(mapping=aes(x=flipper_length_mm, y=body_mass_g, linetype =species )) 
+  
+
+ggplot(data = penguins) +
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g))
+```
+
+```{r}
+ggplot(data = penguins) +
+  geom_jitter(mapping=aes(x=flipper_length_mm, y=body_mass_g))
+```
+
+```{r}
+ggplot(data = diamonds ) + 
+  geom_bar(mapping = aes(x = cut))
+```
+
+```{r}
+ggplot(data = diamonds ) + 
+  geom_bar(mapping = aes(x = cut, color = cut))
+```
+
+```{r}
+ggplot(data = diamonds ) + 
+  geom_bar(mapping = aes(x = cut, fill = cut))
+```
+
+```{r}
+ggplot(data = diamonds ) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+```
+
+### Smoothing
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, 
+y= body_mass_g)) +
+    geom_point() +
+    geom_smooth()
+```
+
+**Smoothing** enables the detection of a data trend even when you can't
+easily notice a trend from the plotted data points. Ggplot2's smoothing
+functionality is helpful because it adds a **smoothing line** as another
+layer to a plot; the smoothing line helps the data to make sense to a
+casual observer.
+
+| **Type of smoothing**             | **Description**                                   | **Example code** |
+|-----------------------------------|---------------------------------------------------|------------------|
+| **Loess smoothing**               | The loess smoothing process is best for smoothing |                  |
+| plots with less than 1000 points. | ggplot(data, aes(x=, y=))+                        |                  |
+
+                                                                                 geom_point() +               
+                                                                                 geom_smooth(method="loess")  |
+
+| **Gam smoothing** \| Gam smoothing, or generalized additive model smoothing, is useful for smoothing plots with a large number of points.  \| ggplot(data, aes(x=, y=)) + geom_point() +         geom_smooth(method="gam", formula = y \~s(x)) \|
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, 
+y= body_mass_g))+ 
+  geom_point() +       
+  geom_smooth(method="loess")
+```
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, 
+y= body_mass_g)) + 
+  geom_point() +        
+  geom_smooth(method="gam", 
+formula = y ~s(x))
+```
+
+# Aesthetics and facets
+
+-   facet_wrap()
+
+-   facet_grid()
+
+### Face wrap
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(
+    x = flipper_length_mm, y= body_mass_g, color = species )
+  ) + 
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(
+    x = color, fill= cut )
+  ) + 
+  facet_wrap(~cut)
+```
+
+### Face grip
+
+Two variables
+
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(
+    x = flipper_length_mm, y= body_mass_g, color = species )
+  ) + 
+  facet_grid(sex~species)
+```
+
+## E​xample of filtering data for plotting
+
+Filtering your data before you plot it allows you to focus on specific
+subsets of your data and gain more targeted insights. To do this, just
+include the dplyr filter() function in your ggplot syntax. 
+
+```{r}
+library(nycflights13)
+```
+
+```{r}
+by_dest <- group_by(flights, dest)
+delay <- summarise(by_dest,
+  count = n(),
+  dist = mean(distance, na.rm = TRUE),
+  delay = mean(arr_delay, na.rm = TRUE)
+)
+#> `summarise()` ungrouping output (override with `.groups` argument)
+delay <- filter(delay, count > 20, dest != "HNL")
+
+# It looks like delays increase with distance up to ~750 miles 
+# and then decrease. Maybe as flights get longer there's more 
+# ability to make up delays in the air?
+ggplot(data = delay, mapping = aes(x = dist, y = delay)) +
+  geom_point(aes(size = count), alpha = 1/3) +
+  geom_smooth(se = FALSE)
+#> `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+# Annotation layer
+
+```{r}
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p + annotate("text", x = 4, y = 25, label = "Annotate some text here!")
+```
+
+```{r}
+p + annotate("text", x = 2:5, y = 25, label = "Some text")
+```
+
+```{r}
+p + annotate("rect", xmin = 3, xmax = 4.2, ymin = 12, ymax = 21,
+  alpha = .2)
+```
+
+```{r}
+p + annotate("segment", x = 2.5, xend = 4, y = 15, yend = 25,
+  colour = "blue")
+```
+
+```{r}
+p + annotate("pointrange", x = 3.5, y = 20, ymin = 12, ymax = 28,
+  colour = "red", size = 1.5)
+```
+
+```{r}
+p + annotate("text", x = 4, y = 25, label = "italic(R) ^ 2 == 0.75",
+  parse = TRUE)
+```
+
+```{r}
+# basic graph
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + 
+  geom_point()
+ 
+# a data frame with all the annotation info
+annotation <- data.frame(
+   x = c(2,4.5),
+   y = c(20,25),
+   label = c("label 1", "label 2")
+)
+
+# Add text
+p + geom_text(data=annotation, aes( x=x, y=y, label=label),                 , 
+           color="orange", 
+           size=7 , angle=45, fontface="bold" )
+
+# Note: possible to shorten with annotate:
+# p +
+#  annotate("text", x = c(2,4.5), y = c(20,25), 
+#           label = c("label 1", "label 2") , color="orange", 
+#           size=7 , angle=45, fontface="bold")
+
+# Right chart: using labels
+p + geom_label(data=annotation, aes( x=x, y=y, label=label),                 , 
+           color="orange", 
+           size=7 , angle=45, fontface="bold" )
+```
+
+```{r}
+# Add rectangles
+p + annotate("rect", xmin=c(2,4), xmax=c(3,5), ymin=c(20,10) , ymax=c(30,20), alpha=0.2, color="blue", fill="blue")
+
+# Add segments
+p + annotate("segment", x = 1, xend = 3, y = 25, yend = 15, colour = "purple", size=3, alpha=0.6)
+
+# Add arrow
+p + annotate("segment", x = 2, xend = 4, y = 15, yend = 25, colour = "pink", size=3, alpha=0.6, arrow=arrow())
+```
+
+```{r}
+p + 
+  # horizontal
+  geom_hline(yintercept=25, color="orange", size=1) + 
+  # vertical
+  geom_vline(xintercept=3, color="orange", size=1)
+```
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(aes(colour = factor(cyl))) + 
+  labs(
+    x = "Engine displacement (litres)", 
+    y = "Highway miles per gallon", 
+    colour = "Number of cylinders",
+    title = "Mileage by engine size and cylinders",
+    subtitle = "Source: http://fueleconomy.gov"
+  )
+```
+
+```{r}
+install.packages("ggtext")
+```
+
+```{r}
+library("ggtext")
+```
+
+```{r}
+df <- data.frame(x = 1:3, y = 1:3)
+base <- ggplot(df, aes(x, y)) + 
+  geom_point() + 
+  labs(x = "Axis title with *italics* and **boldface**")
+
+base 
+base + theme(axis.title.x = ggtext::element_markdown())
+```
+
+```{r}
+df <- data.frame(
+  x = c(1, 1, 2, 2, 1.5),
+  y = c(1, 2, 1, 2, 1.5),
+  text = c(
+    "bottom-left", "bottom-right", 
+    "top-left", "top-right", "center"
+  )
+)
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = text))
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = text), vjust = "inward", hjust = "inward")
+```
+
+```{r}
+df <- data.frame(trt = c("a", "b", "c"), resp = c(1.2, 3.4, 2.5))
+ggplot(df, aes(resp, trt)) + 
+  geom_point() + 
+  geom_text(aes(label = paste0("(", resp, ")")), nudge_y = -0.25) + 
+  xlim(1, 3.6)
+```
+
+```{r}
+ggplot(economics, aes(date, unemploy)) + 
+  geom_line()
+```
+
+```{r}
+presidential <- subset(presidential, start > economics$date[1])
+
+ggplot(economics) + 
+  geom_rect(
+    aes(xmin = start, xmax = end, fill = party), 
+    ymin = -Inf, ymax = Inf, alpha = 0.2, 
+    data = presidential
+  ) + 
+  geom_vline(
+    aes(xintercept = as.numeric(start)), 
+    data = presidential,
+    colour = "grey50", alpha = 0.5
+  ) + 
+  geom_text(
+    aes(x = start, y = 2500, label = name), 
+    data = presidential, 
+    size = 3, vjust = 0, hjust = 0, nudge_x = 50
+  ) + 
+  geom_line(aes(date, unemploy)) + 
+  scale_fill_manual(values = c("blue", "red")) +
+  xlab("date") + 
+  ylab("unemployment")
+```
+
+```{r}
+install.packages("directlabels")
+```
+
+```{r}
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()
+
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point(show.legend = FALSE) +
+  directlabels::geom_dl(aes(label = class), method = "smart.grid")
+```
+
+```{r}
+install.packages("ggforce")
+```
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() + 
+  ggforce::geom_mark_ellipse(aes(label = cyl, group = cyl))
+```
+
+# Saving your visualizations
+
+```{r}
+ggsave("datavizsave.png")
+```
+
+| **Example of using png()**                        | **Example of using pdf()**                            |
+|---------------------------------------------------|-------------------------------------------------------|
+| png(file = "exampleplot.png", bg = "transparent") 
+ plot(1:10)                                         
+ rect(1, 5, 3, 7, col = "white")                    
+ dev.off()                                          | pdf(file = "/Users/username/Desktop/example.pdf",     
+                                                     width = 4,                                             
+                                                     height = 4)                                            
+                                                     plot(x = 1:10,                                         
+                                                      y = 1:10)                                             
+                                                     abline(v = 0)                                          
+                                                     text(x = 0, y = 1, labels = "Random text")             
+                                                     dev.off()                                              |
+
+```{r}
+if (TRUE) {
+ggplot(mtcars, aes(mpg, wt)) + geom_point()
+
+ggsave("mtcars.pdf")
+ggsave("mtcars.png")
+
+ggsave("mtcars.pdf", width = 4, height = 4)
+ggsave("mtcars.pdf", width = 20, height = 20, units = "cm")
+
+# delete files with base::unlink()
+unlink("mtcars.pdf")
+unlink("mtcars.png")
+
+# specify device when saving to a file with unknown extension
+# (for example a server supplied temporary file)
+file <- tempfile()
+ggsave(file, device = "pdf")
+unlink(file)
+
+# save plot to file without using ggsave
+p <- ggplot(mtcars, aes(mpg, wt)) + geom_point()
+png("mtcars.png")
+print(p)
+dev.off()
+
+}
+```
