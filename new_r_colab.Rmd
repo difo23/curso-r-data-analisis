@@ -1,0 +1,299 @@
+---
+title: An R Markdown document converted from "/home/digdata/Documents/code-all/coursera-courses/curso-r-data-analisis/r-course-google/new_r_colab.ipynb"
+output: html_document
+---
+
+# R conceptos
+
+
+[R new notebook](https://colab.research.google.com/notebook#create=true&language=r)
+
+Nota: Este es un notebook hecho en colab solo por curiosidad. Recomiendo usar Rstudio si quieres aprender de forma profesional R. Aqui encontraras mis apuntes sobre el lenguaje de programacion, los conceptos basicos. 
+
+## Install new packages
+
+```{r}
+install.packages("palmerpenguins")
+```
+
+## Use library
+
+```{r}
+library("palmerpenguins")
+```
+
+# Use summary for describe datasets
+
+```{r}
+summary(penguins)
+```
+
+```{r}
+# Head for show the first line of the data set
+head(penguins, 10)
+```
+
+# Asignando valor a las variables con R
+
+---
+
+
+```{r}
+# De esta forma R asigna valores a las variables, no usa "=" :(
+n <- 2
+```
+
+```{r}
+n
+```
+
+```{r}
+# Me parece una riducules pero la flecha indica para donde va el dato. ( No se cual es la inspiracion)
+5 -> n
+```
+
+```{r}
+n
+```
+
+```{r}
+# Es sencible a las mayusculas
+x <- 1
+X <- 10
+```
+
+```{r}
+x
+```
+
+```{r}
+X
+```
+
+## Operadores aritmeticos
+
+```{r}
+n <- 10 + 2 * 4 / 2 -1
+```
+
+```{r}
+n
+```
+
+```{r}
+rnorm(1) # Funciones nativas del lenguaje random normal
+```
+
+```{r}
+2 ^ 2 # Potencia
+```
+
+```{r}
+2 %% 2 # El modulo de toda la vida
+```
+
+```{r}
+5 %/% 2 # Elimina decimal
+```
+
+## Funcion ls() 
+
+```{r}
+ name <- "Carmen"; n1 <- 10; n2 <- 100; m <- 0.5
+```
+
+```{r}
+# Con esta funcion podremos ver los nombres de las variables que se encuentra en memoria
+ls()
+```
+
+```{r}
+ls(pat = "m") # Esto se parece mucho a las expresiones regulares
+```
+
+```{r}
+ls(pat = "^m")
+```
+
+```{r}
+ ls.str() # nos muestra ciertos detalles de nuestros datos en memoria
+```
+
+## Data Frames
+
+```{r}
+M <- data.frame(n1, n2, m)
+```
+
+```{r}
+ls.str(pat="M")
+```
+
+# Solicitar ayuda
+
+```{r}
+?ls
+```
+
+```{r}
+help("*")
+```
+
+```{r}
+help("bs") # Avcs necesistas buscar en todos los paquetes para encontrar ayuda
+```
+
+```{r}
+??bs # Busca en todos los paquetes
+```
+
+```{r}
+help("bs", try.all.packages = TRUE)
+```
+
+```{r}
+help("bs", package = "splines") # Buscar en un package en especifico
+```
+
+```{r}
+help.start()
+```
+
+## R tiene varios tipos de datos
+
+```{r}
+A <- "Gomphotherium"; compar <- TRUE; z <- 1i
+mode(A); mode(compar); mode(z)
+```
+
+```{r}
+ N <- 2.1e23
+```
+
+```{r}
+N
+```
+
+```{r}
+mode(N)
+```
+
+```{r}
+mode (1)
+```
+
+```{r}
+N/ 23456
+```
+
+## R permite la division por cero
+
+```{r}
+5/0 # Usa el objeto especial Inf para representar el infinito
+```
+
+```{r}
+mode(5/0)
+```
+
+```{r}
+Inf - Inf # Retorna un NaN
+```
+
+#  Generating data
+
+```{r}
+x <- 1:30 # generando secuencia incluye el 30
+```
+
+```{r}
+x
+```
+
+```{r}
+1:10-1 # No ta la diferencia al usar operaciones aritmeticas
+```
+
+```{r}
+1:(10-1) # 
+```
+
+```{r}
+seq(1, 5, 0.5)
+```
+
+```{r}
+seq(length=9, from=1, to=5)
+```
+
+```{r}
+a <- c(1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5)
+```
+
+```{r}
+mode(a)
+```
+
+```{r}
+a
+```
+
+```{r}
+rep(1, 30)
+```
+
+```{r}
+sequence(4:5)
+```
+
+```{r}
+sequence(c(10,5))
+```
+
+```{r}
+gl(3, 5)
+```
+
+```{r}
+gl(3, 5, length=30)
+```
+
+```{r}
+gl(2, 6, label=c("Male", "Female"))
+```
+
+# Creating objects
+
+```{r}
+factor(1:3)
+```
+
+```{r}
+factor(1:3, labels=c("A", "B", "C"))
+```
+
+```{r}
+matrix(data=5, nr=2, nc=2)
+```
+
+```{r}
+ matrix(1:6, 2, 3, byrow=TRUE)
+```
+
+```{r}
+x <- 1:15
+x
+```
+
+```{r}
+dim(x)
+```
+
+```{r}
+dim(x) <- c(5, 3) # Puedo covertir un arreglo en una matrix
+```
+
+```{r}
+x
+```
+

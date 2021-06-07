@@ -1,0 +1,47 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Platzi - Course Fundamentals of R
+
+```{r}
+summary(mtcars)
+```
+
+```{r}
+mtcars
+```
+
+```{r}
+wt_new <- (mtcars$wt*1000)/2
+wt_new
+
+```
+
+Transform
+
+```{r}
+mtcars_new <- transform(mtcars, wt = wt_new)
+
+mtcars_new
+```
+
+Load the Orangeec.csv
+
+```{r}
+> library(readr)
+> orangeec <- read_csv("Orange-Economy-master/orangeec.csv")
+```
+
+Summary
+
+```{r}
+summary(orangeec)
+```
+
+```{r}
+str(orangeec)
+```
+
+## 

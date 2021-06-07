@@ -1,0 +1,12 @@
+---
+title: "R Notebook"
+date: "04/06/2021"
+author: "Lizandro Ramirez"
+output: html_document
+---
+
+# Documentation and reports
+
+## YAML
+
+A language for data that translates it so it's readable.

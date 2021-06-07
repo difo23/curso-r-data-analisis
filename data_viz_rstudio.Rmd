@@ -528,19 +528,20 @@ ggplot(mpg, aes(displ, hwy)) +
 ggsave("datavizsave.png")
 ```
 
-| **Example of using png()**                        | **Example of using pdf()**                            |
-|---------------------------------------------------|-------------------------------------------------------|
-| png(file = "exampleplot.png", bg = "transparent") 
- plot(1:10)                                         
- rect(1, 5, 3, 7, col = "white")                    
- dev.off()                                          | pdf(file = "/Users/username/Desktop/example.pdf",     
-                                                     width = 4,                                             
-                                                     height = 4)                                            
-                                                     plot(x = 1:10,                                         
-                                                      y = 1:10)                                             
-                                                     abline(v = 0)                                          
-                                                     text(x = 0, y = 1, labels = "Random text")             
-                                                     dev.off()                                              |
+| **Example of using png()**                        | **Example of using pdf()** |
+|---------------------------------------------------|----------------------------|
+| png(file = "exampleplot.png", bg = "transparent") |                            |
+
+plot(1:10)\
+rect(1, 5, 3, 7, col = "white")\
+dev.off() \| pdf(file = "/Users/username/Desktop/example.pdf",     width
+= 4,     \
+height = 4) \
+plot(x = 1:10,     \
+ y = 1:10)\
+abline(v = 0)\
+text(x = 0, y = 1, labels = "Random text")\
+dev.off() \|
 
 ```{r}
 if (TRUE) {
