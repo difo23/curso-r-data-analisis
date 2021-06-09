@@ -44,4 +44,281 @@ summary(orangeec)
 str(orangeec)
 ```
 
-## 
+```{r}
+orangeec
+```
+
+## Operator %in% search in dataset
+
+```{r}
+ 
+
+"Ecuador" %in% orangeec$Country
+```
+
+## Subset
+
+```{r}
+orangeec_new <- subset(orangeec, `Internet penetration % population` > 80 & `Education invest % GDP` >= 4.5, select = `Creat Ind % GDP`)
+```
+
+```{r}
+orangeec_new
+```
+
+```{r}
+install.packages("dplyr")
+install.packages("janitor")
+library("dplyr")
+library("janitor")
+```
+
+```{r}
+orangeec_rname <- rename( 
+  orangeec, 
+  internet_pen_pop = `Internet penetration % population`,
+  country = Country,
+  gdp_pc = `GDP PC`,
+  gdp_us_bill = `GDP US bill`,
+  gdp_growt= `GDP Growth %`,
+  gdp_us_bill= `GDP US bill`,
+  gdp_growth= `GDP Growth %`,
+  services_gdp= `Services % GDP`,
+  creat_ind_gdp= `Creat Ind % GDP`,
+  inflation= `Inflation`,
+  unemployement= `Unemployment`,
+  pop_below_poverty_line= `% pop below poverty line`,
+  median_age = `Median age`,                    
+  pop_age_of_work = `% pop 25-54`,                    
+  edu_invest_gdp= `Education invest % GDP`,    
+) 
+```
+
+## Names clear with janitor package
+
+```{r}
+
+#Clear name with janitor is the best
+orangeec_new <- janitor::clean_names(orangeec)
+```
+
+```{r}
+
+names(orangeec_new)
+```
+
+```{r}
+orangeec_new[orangeec_new$education_invest_percent_gdp >= 6,]
+```
+
+```{r}
+orang_row <- orangeec_new %>% mutate(ID = row_number())
+orang_row
+```
+
+```{r}
+orang_row[orangeec_new$education_invest_percent_gdp >= 6,]
+```
+
+```{r}
+orang_row[orangeec_new$education_invest_percent_gdp >= 6,"gdp_pc"]
+```
+
+## Cuarteto de Anscombe
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Anscombe.svg/1200px-Anscombe.svg.png)
+
+El **cuarteto de Anscombe** comprende cuatro conjuntos de datos que
+tienen las mismas propiedades estadísticas, pero que evidentemente son
+distintas al inspeccionar sus gráficos respectivos. ... El **cuarteto**
+es una demostración de la importancia de mirar gráficamente un conjunto
+de datos antes de analizarlos.
+
+## EDA
+
+-   Histograma
+
+-   Boxplot
+
+-   Scatterplot
+
+## **Box Plot y su interpretación**
+
+Primero los datos se presentan en forma de **TABLA** y **PUNTOS**. Los
+197 datos que corresponden a las 197 tiendas evaluadas\
+.
+
+**DATOS EN FORMA DE TABLA**\
+![2020-04-28
+(25).png](https://static.platzi.com/media/user_upload/2020-04-28%2520%252825%2529-4e2a5abc-5457-4690-a600-187ed608a1dd.jpg)\
+Con esta vista no es facil extraer, interpretar, ni describir la
+informacion del comportamiento de los datos\
+.
+
+**DATOS EN FORMA DE PUNTOS**\
+![2020-04-28
+(28).png](https://static.platzi.com/media/user_upload/2020-04-28%2520%252828%2529-99cbb1ba-fd46-4ac0-941e-3bd20c380dce.jpg)\
+Muchas tiendas con calificaciòn entre 75 y 80\
+No hay tiendas por encima de 85 y tampoco por debo de 40\
+La informaciòn es limitada\
+.
+
+**ENTONCES ORDENAS LOS DATOS DE MENOR \< A \> MAYOR** 💡\
+[minimo]{.ul} y [maximo]{.ul}\
+![2020-04-28
+(29).png](https://static.platzi.com/media/user_upload/2020-04-28%2520%252829%2529-97636803-b40a-41f5-ab5d-a3d483a83c6d.jpg)\
+La calificaciòn mas baja la tuvo Trujillo 1-PER con 47,8 y la mas alta
+Callao 2-PER 83,3\
+.
+
+**LEVANTAS UNA LINEA A MITAD DE LA LINEA DE DATOS**\
+[media]{.ul}\
+divide los datos en 50% hacia abajo y 50% hacia arriba\
+![2020-04-28
+(30).png](https://static.platzi.com/media/user_upload/2020-04-28%2520%252830%2529-2391aef7-5921-4142-b7b0-37d5aa50ce20.jpg)\
+Ha sido Caracas 2-VEN la tienda que obtuvo la calificaciòn media con
+73,2. *El 50% de las tiendas evaluadas lograron una calificaciòn por
+debajo a 73,2 o que la mitad de las tiendas logro una calificacion
+superior a 73,2*\
+.
+
+**LEVANTAS UNA LINEA A 1/4 DE LA LINEA DE DATOS**\
+[primer cuartil]{.ul}\
+Barranquilla 2-COL obtuvo 64,7\
+*El 25% de las tiendas evaluadas lograron una calificaciòn inferior a
+64,7 o que el 75% de las tiendas lograron una calificaciòn superior a
+64,7*\
+![2020-04-28
+(31).png](https://static.platzi.com/media/user_upload/2020-04-28%2520%252831%2529-eb1fef69-a4e0-4dd8-885e-459ad8244467.jpg)\
+.
+
+**LEVANTAS UNA LINEA A 3/4 DE LA LINEA DE DATOS**\
+[tercer cuartil]{.ul}\
+Guayaquil 2-ECU con calificaciòn de 76,7\
+Podemos decir que *el 75% de nuestras tiendas lograron una calificaciòn
+inferior a 76,7 o que el 25% de las tiendas lograron una calificaciòn
+por encima de 76,7*\
+![2020-04-28
+(32).png](https://static.platzi.com/media/user_upload/2020-04-28%2520%252832%2529-28a0079d-2cae-4837-9d8c-c42811f225b4.jpg)\
+
+**LAS 5 CLAVES DE ESTADISTICA DESCRIPTIVA QUE VES EN EL BOX PLOT**
+
+[~~\
+~~- màximo\
+- tercer quartil\
+- media\
+- primer cuartil\
+- mìnimo]{.smallcaps}
+
+\
+![boxplot.png](https://static.platzi.com/media/user_upload/boxplot-1bb669c1-10d7-4d1b-b97b-1b534d733556.jpg)
+
+## EDA scatterplots
+
+```{r}
+plot(mtcars$mpg ~ mtcars$cyl,
+     xlab ='Cilindros', ylab ='millas por galon',
+     main='Relacion cilindros y millas por galon')
+```
+
+```{r}
+# EDA scaterplot  mtcars
+
+
+
+plot(mtcars$mpg ~ mtcars$hp,
+     xlab ='Caballos de fuerza', ylab ='millas por galon',
+     main='Relacion Caballos de fuerza y millas por galon')
+```
+
+```{r}
+
+
+# EDA scaterplot  orangecc
+
+plot(orangeec_new$unemployment ~ orangeec_new$education_invest_percent_gdp,
+     xlab ='Inversion Educacion (%PIB)',ylab ='Desempleo',
+     main='Relacion entre Inversion  en educaion y desempleo')
+
+
+```
+
+```{r}
+plot(orangeec_new$gdp_pc ~ orangeec_new$creat_ind_percent_gdp,
+     xlab ='Aporte economia naranja al (%PIB)',ylab ='Pib percapita',
+     main='Relacion economia naranja y PIB per capita')
+```
+
+## EDA histograma
+
+```{r}
+hist(mtcars$hp)
+```
+
+```{r}
+# histograsma mtcars qplot
+install.packages("ggplot2")
+library(ggplot2)
+
+
+```
+
+```{r}
+qplot(mtcars$hp,
+      geom = "histogram",
+      xlab = "caballos de fuerza",
+      main = "carros según caballos de fuerza")
+
+
+```
+
+```{r}
+qplot(mtcars$hp,
+      geom = "histogram",
+      xlab = "caballos de fuerza",
+      main = "carros según caballos de fuerza",
+      bins = 10
+)
+```
+
+```{r}
+ggplot(mtcars, aes(x=hp))+
+         geom_histogram()+
+         labs(x='Caballos de fuerza',
+              y='Cantidad de carros',
+              title= 'Cabballos de fuerza en carro seleccionados')+
+        theme(legend.position = "none")+
+        theme(panel.background = element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank())
+
+```
+
+```{r}
+
+ggplot(mtcars, aes(x=hp))+
+  geom_histogram(binwidth = 10)+
+  labs(x='Caballos de fuerza',
+       y='Cantidad de carros',
+       title= 'Cabballos de fuerza en carro seleccionados')+
+  theme(legend.position = "none")+
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+```
+
+```{r}
+
+ggplot() + geom_histogram(data=mtcars,
+                          aes(x=hp), fill = 'blue', color = 'red',
+                          binwidth = 20)+
+  labs(x='Caballos de fuerza',
+       y='Cantidad de carros',
+       title= 'Cabballos de fuerza en carro seleccionados')+
+  xlim(c(80,288))+
+  theme(legend.position = "none")+
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```

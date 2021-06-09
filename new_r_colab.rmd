@@ -5,10 +5,13 @@ output: html_document
 
 # R conceptos
 
+[R new
+notebook](https://colab.research.google.com/notebook#create=true&language=r)
 
-[R new notebook](https://colab.research.google.com/notebook#create=true&language=r)
-
-Nota: Este es un notebook hecho en colab solo por curiosidad. Recomiendo usar Rstudio si quieres aprender de forma profesional R. Aqui encontraras mis apuntes sobre el lenguaje de programacion, los conceptos basicos. 
+Nota: Este es un notebook hecho en colab solo por curiosidad. Recomiendo
+usar Rstudio si quieres aprender de forma profesional R. Aqui
+encontraras mis apuntes sobre el lenguaje de programacion, los conceptos
+basicos.
 
 ## Install new packages
 
@@ -35,8 +38,7 @@ head(penguins, 10)
 
 # Asignando valor a las variables con R
 
----
-
+------------------------------------------------------------------------
 
 ```{r}
 # De esta forma R asigna valores a las variables, no usa "=" :(
@@ -96,7 +98,7 @@ rnorm(1) # Funciones nativas del lenguaje random normal
 5 %/% 2 # Elimina decimal
 ```
 
-## Funcion ls() 
+## Funcion ls()
 
 ```{r}
  name <- "Carmen"; n1 <- 10; n2 <- 100; m <- 0.5
@@ -200,7 +202,7 @@ mode(5/0)
 Inf - Inf # Retorna un NaN
 ```
 
-#  Generating data
+# Generating data
 
 ```{r}
 x <- 1:30 # generando secuencia incluye el 30
@@ -296,4 +298,3 @@ dim(x) <- c(5, 3) # Puedo covertir un arreglo en una matrix
 ```{r}
 x
 ```
-
